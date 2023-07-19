@@ -34,5 +34,17 @@ namespace SafetyBarriers.Properties {
                 this["BarrierAxisElemIds"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BoundCurve1 {
+            get {
+                return ((string)(this["BoundCurve1"]));
+            }
+            set {
+                this["BoundCurve1"] = value;
+            }
+        }
     }
 }
