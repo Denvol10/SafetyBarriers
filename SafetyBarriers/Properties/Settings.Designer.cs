@@ -106,5 +106,17 @@ namespace SafetyBarriers.Properties {
                 this["IsIncludeFinishPost"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public double BeamLength {
+            get {
+                return ((double)(this["BeamLength"]));
+            }
+            set {
+                this["BeamLength"] = value;
+            }
+        }
     }
 }

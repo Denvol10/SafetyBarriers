@@ -187,7 +187,7 @@ namespace SafetyBarriers.ViewModels
         #endregion
 
         #region Длина балок
-        private double _beamLength = 3.0;
+        private double _beamLength = (double)Properties.Settings.Default["BeamLength"];
         public double BeamLength
         {
             get => _beamLength;
@@ -339,6 +339,7 @@ namespace SafetyBarriers.ViewModels
             Properties.Settings.Default["PostStep"] = PostStep;
             Properties.Settings.Default["IsIncludeStartPost"] = IsIncludeStartPost;
             Properties.Settings.Default["IsIncludeFinishPost"] = IsIncludeFinishPost;
+            Properties.Settings.Default["BeamLength"] = BeamLength;
             Properties.Settings.Default.Save();
         }
 
