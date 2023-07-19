@@ -87,7 +87,7 @@ namespace SafetyBarriers.ViewModels
         #endregion
 
         #region Поворот на 180 градусов
-        private bool _isRotateOn180;
+        private bool _isRotateOn180 = (bool)Properties.Settings.Default["IsRotateOn180"];
         public bool IsRotateOn180
         {
             get => _isRotateOn180;
@@ -105,7 +105,7 @@ namespace SafetyBarriers.ViewModels
         #endregion
 
         #region Выбранное начало построения ограждения
-        private string _selectedAlignmentSafityBarrier;
+        private string _selectedAlignmentSafityBarrier = (string)Properties.Settings.Default["SelectedAlignmentSafityBarrier"];
         public string SelectedAlignmentSafityBarrier
         {
             get => _selectedAlignmentSafityBarrier;
@@ -169,7 +169,7 @@ namespace SafetyBarriers.ViewModels
         #endregion
 
         #region Развернуть балки
-        private bool _isReverseBeams;
+        private bool _isReverseBeams = (bool)Properties.Settings.Default["IsReverseBeams"];
         public bool IsReverseBeams
         {
             get => _isReverseBeams;
@@ -340,6 +340,9 @@ namespace SafetyBarriers.ViewModels
             Properties.Settings.Default["IsIncludeStartPost"] = IsIncludeStartPost;
             Properties.Settings.Default["IsIncludeFinishPost"] = IsIncludeFinishPost;
             Properties.Settings.Default["BeamLength"] = BeamLength;
+            Properties.Settings.Default["IsReverseBeams"] = IsReverseBeams;
+            Properties.Settings.Default["SelectedAlignmentSafityBarrier"] = SelectedAlignmentSafityBarrier;
+            Properties.Settings.Default["IsRotateOn180"] = IsRotateOn180;
             Properties.Settings.Default.Save();
         }
 
@@ -359,8 +362,6 @@ namespace SafetyBarriers.ViewModels
                 "Конец",
                 "Середина"
             };
-
-            SelectedAlignmentSafityBarrier = "Начало";
 
             BeamCollection = new ObservableCollection<BeamSetup>()
             {

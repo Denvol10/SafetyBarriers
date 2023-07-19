@@ -118,5 +118,41 @@ namespace SafetyBarriers.Properties {
                 this["BeamLength"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsReverseBeams {
+            get {
+                return ((bool)(this["IsReverseBeams"]));
+            }
+            set {
+                this["IsReverseBeams"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Начало")]
+        public string SelectedAlignmentSafityBarrier {
+            get {
+                return ((string)(this["SelectedAlignmentSafityBarrier"]));
+            }
+            set {
+                this["SelectedAlignmentSafityBarrier"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsRotateOn180 {
+            get {
+                return ((bool)(this["IsRotateOn180"]));
+            }
+            set {
+                this["IsRotateOn180"] = value;
+            }
+        }
     }
 }
