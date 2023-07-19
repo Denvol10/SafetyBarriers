@@ -82,5 +82,17 @@ namespace SafetyBarriers.Properties {
                 this["PostStep"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsIncludeStartPost {
+            get {
+                return ((bool)(this["IsIncludeStartPost"]));
+            }
+            set {
+                this["IsIncludeStartPost"] = value;
+            }
+        }
     }
 }

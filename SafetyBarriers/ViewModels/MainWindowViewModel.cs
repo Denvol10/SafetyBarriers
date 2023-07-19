@@ -114,7 +114,7 @@ namespace SafetyBarriers.ViewModels
         #endregion
 
         #region Начальная стойка ограждения
-        private bool _isIncludeStartPost = true;
+        private bool _isIncludeStartPost = (bool)Properties.Settings.Default["IsIncludeStartPost"];
         public bool IsIncludeStartPost
         {
             get => _isIncludeStartPost;
@@ -337,6 +337,7 @@ namespace SafetyBarriers.ViewModels
             Properties.Settings.Default["BoundCurve2"] = BoundCurve2;
             Properties.Settings.Default["PostIndex"] = GenericModelFamilySymbols.IndexOf(PostFamilySymbol);
             Properties.Settings.Default["PostStep"] = PostStep;
+            Properties.Settings.Default["IsIncludeStartPost"] = IsIncludeStartPost;
             Properties.Settings.Default.Save();
         }
 
