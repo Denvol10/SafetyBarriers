@@ -58,5 +58,17 @@ namespace SafetyBarriers.Properties {
                 this["BoundCurve2"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int PostIndex {
+            get {
+                return ((int)(this["PostIndex"]));
+            }
+            set {
+                this["PostIndex"] = value;
+            }
+        }
     }
 }

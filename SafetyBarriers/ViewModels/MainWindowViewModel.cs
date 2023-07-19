@@ -26,6 +26,8 @@ namespace SafetyBarriers.ViewModels
             set => _revitModel = value;
         }
 
+        private int _postIndex = (int)Properties.Settings.Default["PostIndex"];
+
         #region Заголовок
 
         private string _title = "Барьерное ограждение";
@@ -333,6 +335,7 @@ namespace SafetyBarriers.ViewModels
             Properties.Settings.Default["BarrierAxisElemIds"] = BarrierAxisElemIds;
             Properties.Settings.Default["BoundCurve1"] = BoundCurve1;
             Properties.Settings.Default["BoundCurve2"] = BoundCurve2;
+            Properties.Settings.Default["PostIndex"] = GenericModelFamilySymbols.IndexOf(PostFamilySymbol);
             Properties.Settings.Default.Save();
         }
 
@@ -393,6 +396,13 @@ namespace SafetyBarriers.ViewModels
                     BoundCurve2 = bound2ElementIdInSettings;
                     RevitModel.GetBound2BySettings(bound2ElementIdInSettings);
                 }
+            }
+            #endregion
+
+            #region Инициализация значения типоразмера стойки
+            if(_postIndex >= 0 && _postIndex <= GenericModelFamilySymbols.Count - 1)
+            {
+                PostFamilySymbol = GenericModelFamilySymbols.ElementAt(_postIndex);
             }
             #endregion
 
