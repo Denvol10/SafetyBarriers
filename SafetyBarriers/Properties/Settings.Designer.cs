@@ -70,5 +70,17 @@ namespace SafetyBarriers.Properties {
                 this["PostIndex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2.5")]
+        public double PostStep {
+            get {
+                return ((double)(this["PostStep"]));
+            }
+            set {
+                this["PostStep"] = value;
+            }
+        }
     }
 }

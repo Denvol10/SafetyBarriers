@@ -178,7 +178,7 @@ namespace SafetyBarriers.ViewModels
         #endregion
 
         #region Шаг стоек
-        private double _postStep = 2.5;
+        private double _postStep = (double)Properties.Settings.Default["PostStep"];
         public double PostStep
         {
             get => _postStep;
@@ -336,6 +336,7 @@ namespace SafetyBarriers.ViewModels
             Properties.Settings.Default["BoundCurve1"] = BoundCurve1;
             Properties.Settings.Default["BoundCurve2"] = BoundCurve2;
             Properties.Settings.Default["PostIndex"] = GenericModelFamilySymbols.IndexOf(PostFamilySymbol);
+            Properties.Settings.Default["PostStep"] = PostStep;
             Properties.Settings.Default.Save();
         }
 
