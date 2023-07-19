@@ -301,6 +301,7 @@ namespace SafetyBarriers.ViewModels
                                                       BeamCollection,
                                                       BeamLength);
             RevitModel.CreateSafetyBarrier(PostFamilySymbol, IsReverseBeams);
+            SaveSettings();
             RevitCommand.mainView.Close();
         }
 
@@ -315,6 +316,7 @@ namespace SafetyBarriers.ViewModels
 
         private void OnCloseWindowCommandExecuted(object parameter)
         {
+            SaveSettings();
             RevitCommand.mainView.Close();
         }
 
@@ -325,6 +327,12 @@ namespace SafetyBarriers.ViewModels
         #endregion
 
         #endregion
+
+        private void SaveSettings()
+        {
+            Properties.Settings.Default["BarrierAxisElemIds"] = BarrierAxisElemIds;
+            Properties.Settings.Default.Save();
+        }
 
 
         #region Конструктор класса MainWindowViewModel
@@ -349,6 +357,18 @@ namespace SafetyBarriers.ViewModels
             {
                 new BeamSetup() {OffsetX = 0.2, OffsetZ = 0.7}
             };
+
+            #region Инициализация значения элементам оси из Settings
+            if (!(Properties.Settings.Default["BarrierAxisElemIds"] is null))
+            {
+                string barrierAxisElementIdInSettings = Properties.Settings.Default["BarrierAxisElemIds"].ToString();
+                if(RevitModel.IsAxisLinesExistInModel(barrierAxisElementIdInSettings) && !string.IsNullOrEmpty(barrierAxisElementIdInSettings))
+                {
+                    BarrierAxisElemIds = barrierAxisElementIdInSettings;
+                    RevitModel.GetAxisBySettings(barrierAxisElementIdInSettings);
+                }
+            }
+            #endregion
 
             #region Команды
             GetBarrierAxisCommand = new LambdaCommand(OnGetBarrierAxisCommandExecuted, CanGetBarrierAxisCommandExecute);

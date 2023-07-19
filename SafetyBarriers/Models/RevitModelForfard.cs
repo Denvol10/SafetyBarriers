@@ -32,6 +32,47 @@ namespace SafetyBarriers
             Doc = uiapp.ActiveUIDocument.Document;
         }
 
+        #region Проверка на то существуют линии оси в модели
+        public bool IsAxisLinesExistInModel(string elemIdsInSettings)
+        {
+            var elemIds = RevitGeometryUtils.GetIdsByString(elemIdsInSettings);
+
+            return RevitGeometryUtils.IsElemsExistInModel(Doc, elemIds, typeof(DirectShape));
+        }
+        #endregion
+
+        #region Проверка на то существуют линия границы в модели
+        public bool IsBoundLineExistInModel(string elemIdsInSettings)
+        {
+            var elemIds = RevitGeometryUtils.GetIdsByString(elemIdsInSettings);
+
+            return RevitGeometryUtils.IsElemsExistInModel(Doc, elemIds, typeof(ModelLine));
+        }
+        #endregion
+
+        #region Получение оси экрана из Settings
+        public void GetAxisBySettings(string elemIdsInSettings)
+        {
+            var elemIds = RevitGeometryUtils.GetIdsByString(elemIdsInSettings);
+            var lines = RevitGeometryUtils.GetLinesById(Doc, elemIds);
+            BarrierAxis = new ParametricPolyLine(lines);
+        }
+        #endregion
+
+        #region Получение границы 1 из Settings
+        public void GetBound1BySettings(string elemIdInSettings)
+        {
+            BoundCurve1 = RevitGeometryUtils.GetBoundCurveById(Doc, elemIdInSettings);
+        }
+        #endregion
+
+        #region Получение границы 2 из Settings
+        public void GetBound2BySettings(string elemIdInSettings)
+        {
+            BoundCurve2 = RevitGeometryUtils.GetBoundCurveById(Doc, elemIdInSettings);
+        }
+        #endregion
+
         #region Ось барьерного ограждения
         public ParametricPolyLine BarrierAxis { get; set; }
 
