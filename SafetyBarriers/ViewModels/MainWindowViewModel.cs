@@ -332,6 +332,7 @@ namespace SafetyBarriers.ViewModels
         {
             Properties.Settings.Default["BarrierAxisElemIds"] = BarrierAxisElemIds;
             Properties.Settings.Default["BoundCurve1"] = BoundCurve1;
+            Properties.Settings.Default["BoundCurve2"] = BoundCurve2;
             Properties.Settings.Default.Save();
         }
 
@@ -371,7 +372,7 @@ namespace SafetyBarriers.ViewModels
             }
             #endregion
 
-            #region Инициализация значения элементу границы 1
+            #region Инициализация значения элемента границы 1
             if (!(Properties.Settings.Default["BoundCurve1"] is null))
             {
                 string bound1ElementIdInSettings = Properties.Settings.Default["BoundCurve1"].ToString();
@@ -379,6 +380,18 @@ namespace SafetyBarriers.ViewModels
                 {
                     BoundCurve1 = bound1ElementIdInSettings;
                     RevitModel.GetBound1BySettings(bound1ElementIdInSettings);
+                }
+            }
+            #endregion
+
+            #region Инициализация значения элемента граница 2
+            if (!(Properties.Settings.Default["BoundCurve2"] is null))
+            {
+                string bound2ElementIdInSettings = Properties.Settings.Default["BoundCurve2"].ToString();
+                if(RevitModel.IsBoundLineExistInModel(bound2ElementIdInSettings) && !string.IsNullOrEmpty(bound2ElementIdInSettings))
+                {
+                    BoundCurve2 = bound2ElementIdInSettings;
+                    RevitModel.GetBound2BySettings(bound2ElementIdInSettings);
                 }
             }
             #endregion
