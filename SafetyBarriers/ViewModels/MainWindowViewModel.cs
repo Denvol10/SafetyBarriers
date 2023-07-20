@@ -343,6 +343,11 @@ namespace SafetyBarriers.ViewModels
             Properties.Settings.Default["IsReverseBeams"] = IsReverseBeams;
             Properties.Settings.Default["SelectedAlignmentSafityBarrier"] = SelectedAlignmentSafityBarrier;
             Properties.Settings.Default["IsRotateOn180"] = IsRotateOn180;
+            Properties.Settings.Default.BeamCollection = new System.Collections.Specialized.StringCollection();
+            foreach (var beam in BeamCollection)
+            {
+                Properties.Settings.Default.BeamCollection.Add(beam.ConvertToString(BeamFamilySymbols));
+            }
             Properties.Settings.Default.Save();
         }
 
@@ -363,10 +368,36 @@ namespace SafetyBarriers.ViewModels
                 "Середина"
             };
 
-            BeamCollection = new ObservableCollection<BeamSetup>()
+            BeamCollection = new ObservableCollection<BeamSetup>();
+
+            if (!(Properties.Settings.Default.BeamCollection is null))
             {
-                new BeamSetup() {OffsetX = 0.2, OffsetZ = 0.7}
-            };
+                foreach (var beamString in Properties.Settings.Default.BeamCollection)
+                {
+                    var beam = beamString.Split();
+                    double offsetX = double.Parse(beam[0]);
+                    double offsetZ = double.Parse(beam[1]);
+                    int indexBeamSymbol = int.Parse(beam[2]);
+
+                    if (indexBeamSymbol >= 0 && indexBeamSymbol <= BeamFamilySymbols.Count - 1)
+                    {
+                        BeamCollection.Add(new BeamSetup()
+                        {
+                            OffsetX = offsetX,
+                            OffsetZ = offsetZ,
+                            FamilyAndSymbolName = BeamFamilySymbols.ElementAt(indexBeamSymbol)
+                        });
+                    }
+                    else
+                    {
+                        BeamCollection.Add(new BeamSetup()
+                        {
+                            OffsetX = offsetX,
+                            OffsetZ = offsetZ,
+                        });
+                    }
+                }
+            }
 
             #region Инициализация значения элементам оси из Settings
             if (!(Properties.Settings.Default["BarrierAxisElemIds"] is null))

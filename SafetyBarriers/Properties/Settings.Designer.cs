@@ -154,5 +154,16 @@ namespace SafetyBarriers.Properties {
                 this["IsRotateOn180"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection BeamCollection {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["BeamCollection"]));
+            }
+            set {
+                this["BeamCollection"] = value;
+            }
+        }
     }
 }

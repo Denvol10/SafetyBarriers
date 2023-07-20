@@ -13,5 +13,12 @@ namespace SafetyBarriers.Models
         public double OffsetZ { get; set; }
 
         public FamilySymbolSelector FamilyAndSymbolName { get; set; }
+
+        public string ConvertToString(IEnumerable<FamilySymbolSelector> familySymbols)
+        {
+            return $"{OffsetX} {OffsetZ} {familySymbols.ToList().IndexOf(FamilyAndSymbolName)}";
+        }
+
+
     }
 }
