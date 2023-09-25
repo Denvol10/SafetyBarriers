@@ -125,7 +125,11 @@ namespace SafetyBarriers
         #region Получение названиий семейств для стоек барьерного ограждения
         public ObservableCollection<FamilySymbolSelector> GetPostFamilySymbolNames()
         {
-            var familySymbols = RevitFamilyUtils.GetFamilySymbolNames(Doc, BuiltInCategory.OST_GenericModel);
+            var familySymbols = RevitFamilyUtils.GetFamilySymbolNames(Doc, new List<BuiltInCategory>()
+            {
+                BuiltInCategory.OST_GenericModel,
+                BuiltInCategory.OST_StairsRailing
+            });
             return familySymbols;
         }
         #endregion
@@ -133,7 +137,10 @@ namespace SafetyBarriers
         #region Получение названиий семейств для полотен барьерного ограждения
         public ObservableCollection<FamilySymbolSelector> GetBeamFamilySymbolNames()
         {
-            var familySymbols = RevitFamilyUtils.GetFamilySymbolNames(Doc, BuiltInCategory.OST_StructuralFraming);
+            var familySymbols = RevitFamilyUtils.GetFamilySymbolNames(Doc, new List<BuiltInCategory>()
+            {
+                BuiltInCategory.OST_StructuralFraming,
+            });
             return familySymbols;
         }
         #endregion

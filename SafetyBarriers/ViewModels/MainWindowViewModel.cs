@@ -195,6 +195,15 @@ namespace SafetyBarriers.ViewModels
         }
         #endregion
 
+        #region Развернуть стойки
+        private bool _isRotatePosts;
+        public bool IsRotatePosts
+        {
+            get => _isRotatePosts;
+            set => Set(ref _isRotatePosts, value);
+        }
+        #endregion
+
         #region Команды
 
         #region Получение оси барьерного ограждения
@@ -293,7 +302,7 @@ namespace SafetyBarriers.ViewModels
         private void OnCreateSafetyBarrierCommandExecuted(object parameter)
         {
             RevitModel.GetBoundParameters();
-            RevitModel.GetLocationPostFamilyInstances(IsRotateOn180,
+            RevitModel.GetLocationPostFamilyInstances(IsRotatePosts,
                                                  SelectedAlignmentSafityBarrier,
                                                  IsIncludeStartPost,
                                                  IsIncludeFinishPost,

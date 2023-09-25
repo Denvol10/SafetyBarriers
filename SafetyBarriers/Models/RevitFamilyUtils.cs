@@ -12,15 +12,15 @@ namespace SafetyBarriers.Models
     internal class RevitFamilyUtils
     {
         #region Список названий типоразмеров семейств
-        public static ObservableCollection<FamilySymbolSelector> GetFamilySymbolNames(Document doc, BuiltInCategory builtInCategory)
+        public static ObservableCollection<FamilySymbolSelector> GetFamilySymbolNames(Document doc, IEnumerable<BuiltInCategory> builtInCategories)
         {
             var familySymbolNames = new ObservableCollection<FamilySymbolSelector>();
             var allFamilies = new FilteredElementCollector(doc).OfClass(typeof(Family)).OfType<Family>();
-            var genericModelFamilies = allFamilies.Where(f => f.FamilyCategory.Id.IntegerValue == (int)builtInCategory);
-            if (genericModelFamilies.Count() == 0)
+            var selectedFamilies = allFamilies.Where(f => builtInCategories.Any(bc => (int)bc == f.FamilyCategory.Id.IntegerValue));
+            if (selectedFamilies.Count() == 0)
                 return familySymbolNames;
 
-            foreach (var family in genericModelFamilies)
+            foreach (var family in selectedFamilies)
             {
                 foreach (var symbolId in family.GetFamilySymbolIds())
                 {
