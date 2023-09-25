@@ -190,7 +190,7 @@
                                                 Binding="{Binding OffsetZ}"
                                                 Width="40" />
                             <DataGridTemplateColumn Header="Семейство"
-                                                    Width="*">
+                                                    Width="150">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <ComboBox ItemsSource="{Binding DataContext.BeamFamilySymbols, RelativeSource={RelativeSource AncestorType=Window}}"
@@ -198,6 +198,9 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+                            <DataGridCheckBoxColumn Header="Отзеркалить"
+                                                    Binding="{Binding IsMirrored}"
+                                                    Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <UniformGrid Columns="2"
@@ -225,10 +228,6 @@
                                      Margin="5,0,0,0"
                                      TextAlignment="Center" />
                         </DockPanel>
-                        <CheckBox Content="Отзеркалить балки"
-                                  Style="{StaticResource CheckBoxStyle}"
-                                  HorizontalAlignment="Center"
-                                  IsChecked="{Binding IsReverseBeams}" />
                     </UniformGrid>
                 </StackPanel>
             </GroupBox>
@@ -259,8 +258,8 @@
                                 Content="Создать"
                                 Command="{Binding CreateSafetyBarrierCommand}" />
                         <Button Style="{StaticResource SelectButton}"
-                                Content="Отмена" 
-                                Command="{Binding CloseWindow}"/>
+                                Content="Отмена"
+                                Command="{Binding CloseWindow}" />
                     </UniformGrid>
                 </StackPanel>
             </GroupBox>

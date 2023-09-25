@@ -14,11 +14,12 @@ namespace SafetyBarriers.Models
 
         public FamilySymbolSelector FamilyAndSymbolName { get; set; }
 
+        public bool IsMirrored { get; set; }
+
         public string ConvertToString(IEnumerable<FamilySymbolSelector> familySymbols)
         {
-            return $"{OffsetX} {OffsetZ} {familySymbols.ToList().IndexOf(FamilyAndSymbolName)}";
+            return $"{OffsetX} {OffsetZ} {familySymbols.ToList().IndexOf(FamilyAndSymbolName)} {IsMirrored}";
         }
-
 
     }
 }

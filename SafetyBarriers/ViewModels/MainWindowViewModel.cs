@@ -311,7 +311,7 @@ namespace SafetyBarriers.ViewModels
                                                       SelectedAlignmentSafityBarrier,
                                                       BeamCollection,
                                                       BeamLength);
-            RevitModel.CreateSafetyBarrier(PostFamilySymbol, IsReverseBeams);
+            RevitModel.CreateSafetyBarrier(PostFamilySymbol);
             SaveSettings();
             RevitCommand.mainView.Close();
         }
@@ -387,6 +387,11 @@ namespace SafetyBarriers.ViewModels
                     double offsetX = double.Parse(beam[0]);
                     double offsetZ = double.Parse(beam[1]);
                     int indexBeamSymbol = int.Parse(beam[2]);
+                    bool isMirrored = false;
+                    if (beam.Length >= 4)
+                    {
+                        isMirrored = bool.Parse(beam[3]);
+                    }
 
                     if (indexBeamSymbol >= 0 && indexBeamSymbol <= BeamFamilySymbols.Count - 1)
                     {
@@ -394,7 +399,8 @@ namespace SafetyBarriers.ViewModels
                         {
                             OffsetX = offsetX,
                             OffsetZ = offsetZ,
-                            FamilyAndSymbolName = BeamFamilySymbols.ElementAt(indexBeamSymbol)
+                            FamilyAndSymbolName = BeamFamilySymbols.ElementAt(indexBeamSymbol),
+                            IsMirrored = isMirrored
                         });
                     }
                     else
@@ -403,6 +409,7 @@ namespace SafetyBarriers.ViewModels
                         {
                             OffsetX = offsetX,
                             OffsetZ = offsetZ,
+                            IsMirrored = isMirrored
                         });
                     }
                 }

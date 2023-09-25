@@ -166,8 +166,8 @@ namespace SafetyBarriers
         #endregion
 
         #region Положение полотен барьерного ограждения
-        private List<(List<Curve> Lines, FamilySymbolSelector FamilySymbol)> _beamLocations = new List<(List<Curve> Lines, 
-                                                                                                        FamilySymbolSelector FamilySymbol)>();
+        private List<(List<Curve> Lines, FamilySymbolSelector FamilySymbol, bool IsMirrored)> _beamLocations = new List<(List<Curve> Lines, 
+                                                                                                        FamilySymbolSelector FamilySymbol, bool IsMirrored)>();
         #endregion
 
         #region Получение парметров границ барьерного ограждения
@@ -251,13 +251,13 @@ namespace SafetyBarriers
                     lines.Add(beamLine);
                 }
 
-                _beamLocations.Add((lines, beamSetup.FamilyAndSymbolName));
+                _beamLocations.Add((lines, beamSetup.FamilyAndSymbolName, beamSetup.IsMirrored));
             }
         }
         #endregion
 
         #region Создание барьерного ограждения
-        public void CreateSafetyBarrier(FamilySymbolSelector postFamilyAndSymbolName, bool isReverseBeams)
+        public void CreateSafetyBarrier(FamilySymbolSelector postFamilyAndSymbolName)
         {
             FamilySymbol postFSymbol = RevitFamilyUtils.GetFamilySymbolByName(Doc, postFamilyAndSymbolName);
 
@@ -295,7 +295,7 @@ namespace SafetyBarriers
                         StructuralFramingUtils.DisallowJoinAtEnd(beamFamilyInstance, 0);
                         StructuralFramingUtils.DisallowJoinAtEnd(beamFamilyInstance, 1);
 
-                        if(isReverseBeams)
+                        if(location.IsMirrored)
                         {
                             beamFamilyInstance.flipFacing();
                         }
