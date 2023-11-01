@@ -196,7 +196,7 @@ namespace SafetyBarriers.ViewModels
         #endregion
 
         #region Развернуть стойки
-        private bool _isRotatePosts;
+        private bool _isRotatePosts = Properties.Settings.Default.IsRotatePosts;
         public bool IsRotatePosts
         {
             get => _isRotatePosts;
@@ -353,6 +353,7 @@ namespace SafetyBarriers.ViewModels
             Properties.Settings.Default["SelectedAlignmentSafityBarrier"] = SelectedAlignmentSafityBarrier;
             Properties.Settings.Default["IsRotateOn180"] = IsRotateOn180;
             Properties.Settings.Default.BeamCollection = new System.Collections.Specialized.StringCollection();
+            Properties.Settings.Default.IsRotatePosts = IsRotatePosts;
             foreach (var beam in BeamCollection)
             {
                 Properties.Settings.Default.BeamCollection.Add(beam.ConvertToString(BeamFamilySymbols));

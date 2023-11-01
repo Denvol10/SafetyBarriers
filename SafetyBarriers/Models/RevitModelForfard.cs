@@ -261,7 +261,13 @@ namespace SafetyBarriers
         {
             FamilySymbol postFSymbol = RevitFamilyUtils.GetFamilySymbolByName(Doc, postFamilyAndSymbolName);
 
-            var level = new FilteredElementCollector(Doc).OfCategory(BuiltInCategory.OST_Levels).Where(e => e.Name == "Уровень 1").First() as Level;
+            var level = new FilteredElementCollector(Doc).OfCategory(BuiltInCategory.OST_Levels)
+                                                         .FirstOrDefault(e => e.Name == "Уровень 1") as Level;
+
+            if (level is null)
+            {
+                level = new FilteredElementCollector(Doc).OfCategory(BuiltInCategory.OST_Levels).First() as Level;
+            }
 
             using (Transaction trans = new Transaction(Doc, "Created Safety Barrier"))
             {
@@ -273,7 +279,10 @@ namespace SafetyBarriers
 
                 foreach (var location in _postLocations)
                 {
-                    FamilyInstance postFamilyInstance = Doc.Create.NewFamilyInstance(location.Item1, postFSymbol, Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
+                    FamilyInstance postFamilyInstance = Doc.Create.NewFamilyInstance(
+                        location.Item1,
+                        postFSymbol,
+                        Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
 
                     postFamilyInstance.Location.Rotate(Line.CreateUnbound(location.Point, XYZ.BasisZ), location.Rotation);
                 }
